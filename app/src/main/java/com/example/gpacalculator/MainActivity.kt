@@ -14,7 +14,14 @@ class MainActivity : AppCompatActivity() {
     private lateinit var layout: LinearLayout
     private lateinit var addButton: Button
 
-
+    // to hide keyboard when user click outside of the EditTexts
+    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+        if (currentFocus != null) {
+            val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(currentFocus!!.windowToken, 0)
+        }
+        return super.dispatchTouchEvent(ev)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
